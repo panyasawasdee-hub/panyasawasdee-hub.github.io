@@ -12,7 +12,8 @@
   <script>
     const manager = 'https://panyasawasdee-hub.github.io/kps-short-link/';
     const params = new URLSearchParams(location.search);
-    const bare = /^\?[A-Za-z0-9_-]{1,40}$/.test(location.search) ? location.search.slice(1) : '';
+    const firstKey = Array.from(params.keys())[0] || '';
+    const bare = /^[A-Za-z0-9_-]{1,40}$/.test(firstKey) && params.get(firstKey) === '' ? firstKey : '';
     const code = params.get('id') || bare;
     location.replace(code ? manager + '?' + encodeURIComponent(code) : manager);
   </script>
